@@ -16,6 +16,8 @@ import { PostsComponent } from './component/posts/posts.component';
 import { PostDetailsComponent } from './component/post-details/post-details.component';
 import { AddCommentComponent } from './component/add-comment/add-comment.component';
 import { FormsModule } from '@angular/forms';
+import { RegisterComponent } from './component/register/register.component';
+import { LoginComponent } from './component/login/login.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { FormsModule } from '@angular/forms';
     ImageformComponent,
     PostsComponent,
     PostDetailsComponent,
-    AddCommentComponent
+    AddCommentComponent,
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

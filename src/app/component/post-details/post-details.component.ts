@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IComment } from 'src/app/model/IComment';
+import { CommentResponse } from 'src/app/model/Comment';
 import { Post } from 'src/app/model/Post';
 import { CommentService } from 'src/app/service/comment.service';
 import { PostService } from 'src/app/service/post.service';
@@ -14,7 +14,7 @@ import { PostService } from 'src/app/service/post.service';
 export class PostDetailsComponent implements OnInit {
   posts: Post[] = [];
   id: number;
-  comments: IComment[] = [];
+  comments: CommentResponse[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -41,7 +41,7 @@ export class PostDetailsComponent implements OnInit {
   loadComments() {
     if (this.id == 0) return;
     this.commentService.getPostComments(this.id).subscribe({
-      next: (comments: IComment[]) => {
+      next: (comments: CommentResponse[]) => {
         this.comments = comments;
       }
     });

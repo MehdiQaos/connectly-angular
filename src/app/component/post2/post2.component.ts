@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IComment } from 'src/app/model/IComment';
+import { CommentResponse } from 'src/app/model/Comment';
 import { Post } from 'src/app/model/Post';
 import { CommentService } from 'src/app/service/comment.service';
 import { PostService } from 'src/app/service/post.service';
@@ -29,7 +29,7 @@ export class Post2Component implements OnInit {
     const id = this.post.id;
     if (id == null) return;
     this.commentService.getPostComments(id).subscribe({
-      next: (data: IComment[]) => {
+      next: (data: CommentResponse[]) => {
         this.numOfComments = data.length;
       }
     })

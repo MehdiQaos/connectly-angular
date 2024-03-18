@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { IComment } from 'src/app/model/IComment';
+import { CommentResponse } from 'src/app/model/Comment';
 
 @Component({
   selector: 'app-comment',
@@ -7,5 +7,5 @@ import { IComment } from 'src/app/model/IComment';
   styleUrls: ['./comment.component.css']
 })
 export class CommentComponent {
-  @Input() comment!: IComment;
+  @Input() comment!: CommentResponse;
 }

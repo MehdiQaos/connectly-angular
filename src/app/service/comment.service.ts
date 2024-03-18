@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { EnvService } from './env.service';
 import { Observable } from 'rxjs';
-import { CommentRequest, IComment } from '../model/IComment';
+import { CommentRequest, CommentResponse } from '../model/Comment';
 
 @Injectable({
   providedIn: 'root'
@@ -17,12 +17,12 @@ export class CommentService {
     this.url = envService.ApiUrl + "/comments"
   }
 
-  getPostComments(id: number): Observable<IComment[]> {
+  getPostComments(id: number): Observable<CommentResponse[]> {
     const url = `${this.url}/post/${id}`;
-    return this.httpClient.get<IComment[]>(url);
+    return this.httpClient.get<CommentResponse[]>(url);
   }
 
-  addComment(comment: CommentRequest): Observable<IComment> {
-    return this.httpClient.post<IComment>(this.url, comment);
+  addComment(comment: CommentRequest): Observable<CommentResponse> {
+    return this.httpClient.post<CommentResponse>(this.url, comment);
   }
 }

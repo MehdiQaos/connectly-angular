@@ -1,19 +1,11 @@
-import { IMember, Member } from "./Member";
+import { Member } from "./Member";
 
-export interface IPost {
-    id: number;
-    content: string;
-    imageLocation: string | null;
-    member: IMember
-    likedMembers: IMember[];
-}
-
-export class Post implements IPost {
+export class Post {
     constructor(
         public id: number = 0,
         public content: string = '',
         public imageLocation = '',
-        public member: IMember = new Member(),
-        public likedMembers: IMember[] = []
+        public member: Member = new Member(),
+        public likedMembers: Member[] = []
     ) {}
 }

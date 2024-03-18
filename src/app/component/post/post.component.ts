@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IPost } from 'src/app/model/Post';
+import { Post } from 'src/app/model/Post';
 
 @Component({
   selector: 'app-post',
@@ -7,7 +7,7 @@ import { IPost } from 'src/app/model/Post';
   styleUrls: ['./post.component.css']
 })
 export class PostComponent implements OnInit {
-  @Input() post!: IPost;
+  @Input() post!: Post;
   numOfLikes = 20;
 
   ngOnInit() {

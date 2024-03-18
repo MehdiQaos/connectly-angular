@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { CommentRequest } from 'src/app/model/IComment';
+import { CommentRequest } from 'src/app/model/Comment';
 import { CommentService } from 'src/app/service/comment.service';
 
 @Component({
