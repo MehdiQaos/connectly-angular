@@ -25,14 +25,6 @@ export class LoginComponent implements OnInit {
   }
 
   submit() {
-    this.auth.login(this.form.getRawValue()).subscribe({
-      next: (res) => {
-        this.auth.processToken(res);
-        this.router.navigate(['/']);
-      },
-      error: (err) => {
-        console.error(err);
-      }
-    })
+    this.auth.login(this.form.getRawValue());
   }
 }

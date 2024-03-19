@@ -6,7 +6,7 @@ import { Member } from '../model/Member';
 })
 export class StoreService {
 
-  getUser() {
+  get user() {
     const rawUser = localStorage['user'];
     return rawUser ? JSON.parse(rawUser) : null;
   }

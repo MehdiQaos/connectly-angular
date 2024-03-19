@@ -6,53 +6,63 @@ import { StoreService } from './store.service';
 import { getPaylodFromToken, getUserFromToken } from '../utils/Token-utils';
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
 };
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
   store: StoreService = inject(StoreService);
 
   constructor(
-    private http: HttpClient, 
+    private http: HttpClient,
     private router: Router,
-    private envService: EnvService
-  ) { }
+    private envService: EnvService,
+  ) {}
 
-    private getUser(email: string) {
-    const url = this.envService.ApiUrl + `/member/email/${email}`;
+  private storeUserAndRedirect(email: string) {
+    const url = this.envService.ApiUrl + `/members/email/${email}`;
     this.http.get(url, httpOptions).subscribe((res: any) => {
       console.log(res);
       this.store.setUser(res);
+      this.router.navigate(['/']);
     });
   }
 
   login(form: any) {
-    const url = this.envService.ApiUrl + "/auth/login";
-    
-    return this.http.post(url, { email: form.email, password: form.password });
+    const url = this.envService.ApiUrl + '/auth/login';
+
+    return this.http
+      .post(url, { email: form.email, password: form.password })
+      .subscribe({
+        next: (res) => {
+          this.processTokenAndRedirect(res);
+          // this.router.navigate(['/']);
+        },
+        error: (err) => {
+          console.error(err);
+        },
+      });
   }
 
   register(form: any) {
-    const url = this.envService.ApiUrl + "/auth/signup";
+    const url = this.envService.ApiUrl + '/auth/signup';
 
     return this.http.post(url, form, httpOptions);
   }
 
-  processToken(res: any) {
+  processTokenAndRedirect(res: any) {
     this.saveTokens(res);
-    
+
     const email = getUserFromToken(res.accessToken);
     this.store.setAuthenticated(true);
-    this.getUser(email);
     const payload = getPaylodFromToken(res.accessToken);
     const authorities = payload.authorities;
-    
+
     this.store.setAuthorities(authorities);
-    
-    this.router.navigate(['/']);
+
+    this.storeUserAndRedirect(email);
   }
 
   private saveTokens(res: any) {
@@ -61,8 +71,8 @@ export class AuthService {
   }
 
   logout() {
-    const url = this.envService.ApiUrl + "/auth/logout";
-    
+    const url = this.envService.ApiUrl + '/auth/logout';
+
     this.http.post(url, {}, httpOptions).subscribe((res: any) => {
       this.store.clearAuth();
       this.router.navigate(['/login']);
@@ -70,20 +80,26 @@ export class AuthService {
   }
 
   isAdmin() {
-    return this.store.isAuthenticated() &&
-      this.store.getAuthorities().includes('ROLE_ADMIN');
+    return (
+      this.store.isAuthenticated() &&
+      this.store.getAuthorities().includes('ROLE_ADMIN')
+    );
   }
 
   isJury() {
-    return this.store.isAuthenticated() &&
+    return (
+      this.store.isAuthenticated() &&
       (this.store.getAuthorities().includes('ROLE_ADMIN') ||
-      this.store.getAuthorities().includes('ROLE_JURY'));
+        this.store.getAuthorities().includes('ROLE_JURY'))
+    );
   }
 
   isUser() {
-    return this.store.isAuthenticated() &&
+    return (
+      this.store.isAuthenticated() &&
       (this.store.getAuthorities().includes('ROLE_ADMIN') ||
-      this.store.getAuthorities().includes('ROLE_JURY') ||
-      this.store.getAuthorities().includes('ROLE_USER'));
+        this.store.getAuthorities().includes('ROLE_JURY') ||
+        this.store.getAuthorities().includes('ROLE_USER'))
+    );
   }
 }

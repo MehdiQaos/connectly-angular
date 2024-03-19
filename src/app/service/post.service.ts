@@ -17,6 +17,11 @@ export class PostService {
     this.url = envService.ApiUrl + "/posts"
   }
 
+  getFollowingPosts(memberId: number): Observable<Post[]> {
+    const url = `${this.url}/followings/${memberId}`;
+    return this.httpClient.get<Post[]>(url);
+  }
+
   getPost(id: number): Observable<Post> {
     const url = `${this.url}/${id}`;
     return this.httpClient.get<Post>(url);
