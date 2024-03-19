@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Member } from '../model/Member';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class StoreService {
     return rawUser ? JSON.parse(rawUser) : null;
   }
 
-  setUser(user: IMember | null) {
+  setUser(user: Member | null) {
     localStorage.setItem('user', JSON.stringify(user));
   }
 

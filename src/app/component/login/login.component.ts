@@ -1,15 +1,38 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   form!: FormGroup;
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private auth: AuthService,
+    private router: Router
   ) {}
+
+  ngOnInit() {
+    this.form = this.formBuilder.group({
+      email: '',
+      password: ''
+    });
+  }
+
+  submit() {
+    this.auth.login(this.form.getRawValue()).subscribe({
+      next: (res) => {
+        this.auth.processToken(res);
+        this.router.navigate(['/']);
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    })
+  }
 }
