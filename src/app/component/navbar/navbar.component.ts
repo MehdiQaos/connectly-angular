@@ -35,6 +35,6 @@ export class NavbarComponent {
 
   goToProfile() {
     this.toggleDropdown();
-    this.router.navigate(['/member', this.store.user.id]);
+    this.router.navigate(['/profile', this.store.user.id]);
   }
 }

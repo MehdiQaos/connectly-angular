@@ -6,10 +6,12 @@
       class="w-12 h-12 rounded-full mr-4"
     />
     <div>
-      <div class="text-lg font-medium text-gray-800">
-        {{ post.member.firstName }} {{ post.member.lastName }}
-      </div>
-      <div class="text-gray-500">{{ post.member.email }}</div>
+      <a [routerLink]="['/profile', post.member.id]">
+        <div class="text-lg font-medium text-gray-800">
+          {{ post.member.firstName }} {{ post.member.lastName }}
+        </div>
+        <div class="text-gray-500">{{ post.member.email }}</div>
+      </a>
     </div>
   </div>
   <a [routerLink]="['/posts', post.id]">

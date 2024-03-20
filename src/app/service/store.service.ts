@@ -1,10 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Member } from '../model/Member';
+import { EnvService } from './env.service';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StoreService {
+
+  constructor(
+    private envService: EnvService,
+    private http: HttpClient
+  ) { }
 
   get user() {
     const rawUser = localStorage['user'];
@@ -48,6 +55,13 @@ export class StoreService {
       localStorage.setItem('refreshToken', token);
     else
       localStorage.removeItem('refreshToken');
+  }
+
+  public updateUser(email: string) {
+    const url = this.envService.ApiUrl + `/members/email/${email}`;
+    this.http.get(url).subscribe((res: any) => {
+      this.setUser(res);
+    });
   }
 
   isAuthenticated() {

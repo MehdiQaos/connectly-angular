@@ -9,7 +9,6 @@ export class Member {
         public location: string = '',
         public profession: string = '',
         public profilePictureLocation: string = '',
-        public coverPictureLocation: string = ''
     ) { }
 }
 

@@ -6,15 +6,21 @@
           class="grid grid-cols-3 text-center order-last md:order-first mt-20 md:mt-0"
         >
           <div>
-            <p class="font-bold text-gray-700 text-xl">{{ profile.numberOfFollowers }}</p>
+            <p class="font-bold text-gray-700 text-xl">
+              {{ profile.numberOfFollowers }}
+            </p>
             <p class="text-gray-400">Followers</p>
           </div>
           <div>
-            <p class="font-bold text-gray-700 text-xl">{{ profile.numberOfFollowings }}</p>
+            <p class="font-bold text-gray-700 text-xl">
+              {{ profile.numberOfFollowings }}
+            </p>
             <p class="text-gray-400">Follows</p>
           </div>
           <div>
-            <p class="font-bold text-gray-700 text-xl">{{ profile.numberOfPosts }}</p>
+            <p class="font-bold text-gray-700 text-xl">
+              {{ profile.numberOfPosts }}
+            </p>
             <p class="text-gray-400">Posts</p>
           </div>
         </div>
@@ -40,10 +46,36 @@
           class="space-x-8 flex justify-between mt-32 md:mt-0 md:justify-center"
         >
           <button
-            class="text-white py-2 px-4 uppercase rounded bg-blue-400 hover:bg-blue-500 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5"
+          *ngIf="isFollowing"
+            (click)="unFollow()"
+            [disabled]="isOwnProfile"
+            [ngClass]="{
+              'text-gray-500 bg-gray-300': isOwnProfile,
+              'text-white bg-blue-400 hover:bg-blue-500 transition transform hover:-translate-y-0.5 shadow hover:shadow-lg':
+                !isOwnProfile
+            }"
+            class="py-2 px-4 uppercase rounded font-medium"
+          >
+            Unfollow
+          </button>
+          <button
+          *ngIf="!isFollowing"
+            (click)="follow()"
+            [disabled]="isOwnProfile"
+            [ngClass]="{
+              'text-gray-500 bg-gray-300': isOwnProfile,
+              'text-white bg-blue-400 hover:bg-blue-500 transition transform hover:-translate-y-0.5 shadow hover:shadow-lg':
+                !isOwnProfile
+            }"
+            class="py-2 px-4 uppercase rounded font-medium"
           >
             Follow
           </button>
+          <!-- <button
+            class="text-white py-2 px-4 uppercase rounded bg-blue-400 hover:bg-blue-500 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5"
+          >
+            Follow
+          </button> -->
           <!-- <button
             class="text-white py-2 px-4 uppercase rounded bg-gray-700 hover:bg-gray-800 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5"
           >
@@ -53,22 +85,28 @@
       </div>
       <div class="mt-20 text-center border-b pb-12">
         <h1 class="text-4xl font-medium text-gray-700">
-          {{ profile.member.firstName }} {{ profile.member.lastName }}, <span class="font-light text-gray-500">{{ age }}</span>
+          {{ profile.member.firstName }} {{ profile.member.lastName }},
+          <span class="font-light text-gray-500">{{ age }}</span>
         </h1>
         <p class="font-light text-gray-600 mt-3">{{ profile.member.email }}</p>
         <p class="mt-8 text-gray-500">
-            {{ profile.member.profession}}
+          {{ profile.member.profession }}
         </p>
         <p class="mt-2 text-gray-500">{{ profile.member.location }}</p>
       </div>
       <div class="mt-12 flex flex-col justify-center">
         <p class="text-gray-600 text-center font-light lg:px-16">
-            {{ profile.member.bio }}
+          {{ profile.member.bio }}
         </p>
         <!-- <button class="text-indigo-500 py-2 px-4 font-medium mt-4">
           Show more
         </button> -->
       </div>
+    </div>
+  </div>
+  <div class="my-5" *ngFor="let post of posts">
+    <div class="my-3">
+      <app-post2 [post]="post"></app-post2>
     </div>
   </div>
 </div>

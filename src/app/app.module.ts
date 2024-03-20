@@ -22,6 +22,8 @@ import { AddPostComponent } from './component/add-post/add-post.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthInterceptor } from './interceptor/auth.interceptor';
 import { ProfileComponent } from './component/profile/profile.component';
+import { EditEmailComponent } from './component/forms/edit-email/edit-email.component';
+import { EditPasswordComponent } from './component/forms/edit-password/edit-password.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { ProfileComponent } from './component/profile/profile.component';
     RegisterComponent,
     LoginComponent,
     AddPostComponent,
-    ProfileComponent
+    ProfileComponent,
+    EditEmailComponent,
+    EditPasswordComponent
   ],
   imports: [
     BrowserModule,
