@@ -1,0 +1,200 @@
+<form
+  [formGroup]="profileForm"
+  (ngSubmit)="updateProfile()"
+  class="items-center mt-8 sm:mt-14 text-[#202142]"
+>
+  <div class="mb-2 sm:mb-6">
+    <label
+      for="first_name"
+      class="block mb-2 text-sm font-medium text-indigo-900"
+      >Your first name</label
+    >
+    <input
+      type="text"
+      id="first_name"
+      class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5"
+      formControlName="firstName"
+      placeholder="Your first name"
+    />
+    <div
+      *ngIf="
+        profileForm.controls['firstName'].touched &&
+        profileForm.controls['firstName'].invalid
+      "
+    >
+      <small
+        class="text-red-500"
+        *ngIf="profileForm.controls['firstName'].errors?.['required']"
+      >
+        First name is required.
+      </small>
+    </div>
+  </div>
+
+  <div class="mb-2 sm:mb-6">
+    <label
+      for="last_name"
+      class="block mb-2 text-sm font-medium text-indigo-900"
+      >Your last name</label
+    >
+    <input
+      type="text"
+      id="last_name"
+      class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5"
+      formControlName="lastName"
+      placeholder="Your last name"
+    />
+    <div
+      *ngIf="
+        profileForm.controls['lastName'].touched &&
+        profileForm.controls['lastName'].invalid
+      "
+    >
+      <small
+        class="text-red-500"
+        *ngIf="profileForm.controls['lastName'].errors?.['required']"
+      >
+        Last name is required.
+      </small>
+    </div>
+  </div>
+
+  <div class="mb-2 sm:mb-6">
+    <label
+      for="birthDate"
+      class="block mb-2 text-sm font-medium text-indigo-900"
+      >Your Birth Date</label
+    >
+    <input
+      type="date"
+      id="birthDate"
+      class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5"
+      formControlName="birthDate"
+    />
+    <div
+      *ngIf="
+        profileForm.controls['birthDate'].touched &&
+        profileForm.controls['birthDate'].invalid
+      "
+    >
+      <small
+        class="text-red-500"
+        *ngIf="profileForm.controls['birthDate'].errors?.['required']"
+      >
+        Birth date is required.
+      </small>
+    </div>
+  </div>
+
+  <div class="mb-2 sm:mb-6">
+    <label
+      for="profession"
+      class="block mb-2 text-sm font-medium text-indigo-900"
+      >Profession</label
+    >
+    <input
+      type="text"
+      id="profession"
+      class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5"
+      formControlName="profession"
+      placeholder="your profession"
+    />
+    <div
+      *ngIf="
+        profileForm.controls['profession'].touched &&
+        profileForm.controls['profession'].invalid
+      "
+    >
+      <small
+        class="text-red-500"
+        *ngIf="profileForm.controls['profession'].errors?.['required']"
+      >
+        Profession is required.
+      </small>
+    </div>
+  </div>
+
+  <div class="mb-2 sm:mb-6">
+    <label for="location" class="block mb-2 text-sm font-medium text-indigo-900"
+      >Location</label
+    >
+    <input
+      type="text"
+      id="location"
+      formControlName="location"
+      class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5"
+      placeholder="your location"
+    />
+    <div
+      *ngIf="
+        profileForm.controls['location'].touched &&
+        profileForm.controls['location'].invalid
+      "
+    >
+      <small
+        class="text-red-500"
+        *ngIf="profileForm.controls['location'].errors?.['required']"
+      >
+        Location is required.
+      </small>
+    </div>
+  </div>
+
+  <div class="mb-6">
+    <label for="message" class="block mb-2 text-sm font-medium text-indigo-900"
+      >Bio</label
+    >
+    <textarea
+      id="message"
+      rows="4"
+      formControlName="bio"
+      class="block p-2.5 w-full text-sm text-indigo-900 bg-indigo-50 rounded-lg border border-indigo-300 focus:ring-indigo-500 focus:border-indigo-500"
+      placeholder="Write your bio here..."
+    ></textarea>
+    <div
+      *ngIf="
+        profileForm.controls['bio'].touched &&
+        profileForm.controls['bio'].invalid
+      "
+    >
+      <small
+        class="text-red-500"
+        *ngIf="profileForm.controls['bio'].errors?.['required']"
+      >
+        Bio is required.
+      </small>
+    </div>
+  </div>
+  <!-- success message -->
+  <div
+    *ngIf="successMessage"
+    class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative my-4"
+    role="alert"
+  >
+    <strong class="font-bold">Success!</strong>
+    <span class="block sm:inline">{{ successMessage }}</span>
+    <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+      <button (click)="successMessage = null" class="text-green-700">
+        <svg
+          class="fill-current h-6 w-6"
+          role="button"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+        >
+          <title>Close</title>
+          <path
+            d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"
+          ></path>
+        </svg>
+      </button>
+    </span>
+  </div>
+  <div class="flex justify-end">
+    <button
+      type="submit"
+      class="text-white bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+    >
+      Save
+    </button>
+  </div>
+</form>

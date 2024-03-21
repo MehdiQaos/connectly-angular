@@ -24,6 +24,8 @@ import { AuthInterceptor } from './interceptor/auth.interceptor';
 import { ProfileComponent } from './component/profile/profile.component';
 import { EditEmailComponent } from './component/forms/edit-email/edit-email.component';
 import { EditPasswordComponent } from './component/forms/edit-password/edit-password.component';
+import { EditInfosComponent } from './component/forms/edit-infos/edit-infos.component';
+import { EditProfilePictureComponent } from './component/forms/edit-profile-picture/edit-profile-picture.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,9 @@ import { EditPasswordComponent } from './component/forms/edit-password/edit-pass
     AddPostComponent,
     ProfileComponent,
     EditEmailComponent,
-    EditPasswordComponent
+    EditPasswordComponent,
+    EditInfosComponent,
+    EditProfilePictureComponent
   ],
   imports: [
     BrowserModule,
