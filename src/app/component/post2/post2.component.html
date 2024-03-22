@@ -1,10 +1,12 @@
-<div class="max-w-4xl shadow-md mx-auto border px-6 py-4 rounded-lg">
+<div class="max-w-4xl flex flex-col shadow-md mx-auto border px-6 py-4 rounded-lg">
   <div class="flex items-center mb-6">
-    <img
-      src="https://randomuser.me/api/portraits/men/97.jpg"
-      alt="Avatar"
-      class="w-12 h-12 rounded-full mr-4"
-    />
+      <app-no-image *ngIf="!profilePictureUrl" [size]=6/>
+      <img
+        *ngIf="profilePictureUrl"
+        [src]="profilePictureUrl"
+        alt="Avatar"
+        class="w-12 h-12 rounded-full mr-4"
+      />
     <div>
       <a [routerLink]="['/profile', post.member.id]">
         <div class="text-lg font-medium text-gray-800">
@@ -14,19 +16,12 @@
       </a>
     </div>
   </div>
+  <div class="mb-2" *ngIf="imageUrl">
+    <img class="rounded-lg" [src]="imageUrl" alt="">
+  </div>
   <a [routerLink]="['/posts', post.id]">
     <p class="text-lg leading-relaxed mb-6">{{ post.content }}</p>
   </a>
-  <!-- <div class="flex justify-between items-center">
-        <div>
-            <a href="#" class="text-gray-500 hover:text-gray-700 mr-4"><i class="far fa-thumbs-up"></i>10 Like</a>
-            <a href="#" class="text-gray-500 hover:text-gray-700"><i class="far fa-comment-alt"></i> Reply</a>
-        </div>
-        <div class="flex items-center">
-            <a href="#" class="text-gray-500 hover:text-gray-700 mr-4"><i class="far fa-flag"></i> Report</a>
-            <a href="#" class="text-gray-500 hover:text-gray-700"><i class="far fa-share-square"></i> Share</a>
-        </div>
-    </div> -->
   <div class="mt-4 flex justify-between items-center">
     <div class="flex">
       <div class="flex mr-2 text-gray-700 text-sm hover:text-red-600">

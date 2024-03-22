@@ -26,6 +26,8 @@ import { EditEmailComponent } from './component/forms/edit-email/edit-email.comp
 import { EditPasswordComponent } from './component/forms/edit-password/edit-password.component';
 import { EditInfosComponent } from './component/forms/edit-infos/edit-infos.component';
 import { EditProfilePictureComponent } from './component/forms/edit-profile-picture/edit-profile-picture.component';
+import { CreatePostComponent } from './component/forms/create-post/create-post.component';
+import { NoImageComponent } from './component/images/no-image/no-image.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,9 @@ import { EditProfilePictureComponent } from './component/forms/edit-profile-pict
     EditEmailComponent,
     EditPasswordComponent,
     EditInfosComponent,
-    EditProfilePictureComponent
+    EditProfilePictureComponent,
+    CreatePostComponent,
+    NoImageComponent,
   ],
   imports: [
     BrowserModule,

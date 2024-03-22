@@ -27,6 +27,11 @@ export class PostService {
     return this.httpClient.get<Post[]>(url);
   }
 
+  createPost(memberId: number, formData: FormData): Observable<Post> {
+    const url = `${this.url}/${memberId}`;
+    return this.httpClient.post<Post>(url, formData);
+  }
+
   getPost(id: number): Observable<Post> {
     const url = `${this.url}/${id}`;
     return this.httpClient.get<Post>(url);
