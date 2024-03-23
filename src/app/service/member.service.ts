@@ -55,4 +55,11 @@ export class MemberService {
       .set('newPassword', newPassword);
     return this.httpClient.patch<Member>(url, null, { params });
   }
+
+  updateProfilePicture(file: File, id: number): Observable<Member> {
+    const url = `${this.url}/${id}/picture`;
+    const formData = new FormData();
+    formData.append('file', file, file.name);
+    return this.httpClient.post<Member>(url, formData);
+  }
 }

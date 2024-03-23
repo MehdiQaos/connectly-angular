@@ -4,6 +4,8 @@ import { AuthService } from 'src/app/service/auth.service';
 import { MemberService } from 'src/app/service/member.service';
 import { StoreService } from 'src/app/service/store.service';
 
+import { alertFailure, alertSuccess } from 'src/app/utils/Alerts-utils';
+
 @Component({
   selector: 'app-edit-email',
   templateUrl: './edit-email.component.html',
@@ -17,7 +19,7 @@ export class EditEmailComponent implements OnInit {
     private fb: FormBuilder,
     private store: StoreService,
     private memberService: MemberService,
-    private auth: AuthService
+    private auth: AuthService,
   ) {
     const user = this.store.user;
 
@@ -33,8 +35,7 @@ export class EditEmailComponent implements OnInit {
     this.isEditing = !this.isEditing;
     if (this.emailForm.get('email')?.disabled)
       this.emailForm.get('email')?.enable();
-    else
-      this.emailForm.get('email')?.disable();
+    else this.emailForm.get('email')?.disable();
   }
 
   updateEmail() {
@@ -43,11 +44,12 @@ export class EditEmailComponent implements OnInit {
     this.memberService.updateEmail(email, id).subscribe({
       next: () => {
         this.auth.logout();
+        alertSuccess('Email updated successfully');
       },
       error: (err) => {
         console.error(err);
+        alertFailure('Email could not be updated');
       },
     });
   }
-
 }

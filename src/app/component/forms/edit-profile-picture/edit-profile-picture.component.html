@@ -1,18 +1,18 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()" class="flex flex-col items-center space-y-5 sm:flex-row sm:space-y-0">
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="flex flex-col items-center justify-center space-y-5 sm:flex-row sm:space-y-0">
   <div class="relative">
+    <app-no-image *ngIf="!selectedFile && !user.profilePictureLocation" [size]=20/>
     <img
-      #picture
       class="object-cover w-40 h-40 p-1 rounded-full ring-2 ring-indigo-300"
-      *ngIf="!user.profilePictureLocation"
-      src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGZhY2V8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60"
+      *ngIf="!selectedFile && user.profilePictureLocation"
+      [src]="imageService.getImageUrl(user.profilePictureLocation)"
       alt="Bordered avatar"
     />
     <img
       #picture
       class="object-cover w-40 h-40 p-1 rounded-full ring-2 ring-indigo-300"
-      *ngIf="user.profilePictureLocation"
-      src="http://localhost:8080/api/storage/images/{{ user.profilePictureLocation }}"
+      src=""
       alt="Bordered avatar"
+      hidden
     />
     <label class="absolute bg-gray-100 p-2 rounded-full bottom-1 right-0">
       <svg
@@ -61,12 +61,6 @@
       class="py-3.5 px-7 hover:cursor-pointer text-base font-medium text-indigo-100 focus:outline-none bg-[#202142] rounded-lg border border-indigo-200 hover:bg-indigo-900 focus:z-10 focus:ring-4 focus:ring-indigo-200"
       type="submit"
       >Change picture
-    </button>
-    <button
-      type="button"
-      class="py-3.5 px-7 text-base font-medium text-indigo-900 focus:outline-none bg-white rounded-lg border border-indigo-200 hover:bg-indigo-100 hover:text-[#202142] focus:z-10 focus:ring-4 focus:ring-indigo-200"
-    >
-      Delete picture
     </button>
   </div>
 </form>

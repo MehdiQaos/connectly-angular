@@ -1,11 +1,10 @@
-import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from 'src/app/service/auth.service';
 import { ImageService } from 'src/app/service/image.service';
-import { MemberService } from 'src/app/service/member.service';
 import { PostService } from 'src/app/service/post.service';
 import { StoreService } from 'src/app/service/store.service';
+
+import { alertFailure, alertSuccess } from 'src/app/utils/Alerts-utils';
 
 @Component({
   selector: 'app-create-post',
@@ -23,14 +22,13 @@ export class CreatePostComponent {
   constructor(
     private fb: FormBuilder,
     private store: StoreService,
-    private http: HttpClient,
-    private memberService: MemberService,
-    private auth: AuthService,
     private postService: PostService,
-    private imageService: ImageService
+    private imageService: ImageService,
   ) {
     this.user = this.store.user;
-    this.profilePictureUrl = imageService.getImageUrl(this.user.profilePictureLocation);
+    this.profilePictureUrl = imageService.getImageUrl(
+      this.user.profilePictureLocation,
+    );
     this.form = this.fb.group({
       content: ['', Validators.required],
       file: [''],
@@ -66,8 +64,10 @@ export class CreatePostComponent {
         console.log('Post created successfully');
         console.log(response);
         this.clearForm();
+        alertSuccess('Post added successfully');
       },
       error: (error) => {
+        alertFailure('Post could not be created');
         console.error(error);
       },
     });

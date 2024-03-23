@@ -6,10 +6,12 @@ import { Post } from 'src/app/model/Post';
 import { CommentService } from 'src/app/service/comment.service';
 import { PostService } from 'src/app/service/post.service';
 
+import { alertFailure, alertSuccess } from 'src/app/utils/Alerts-utils';
+
 @Component({
   selector: 'app-post-details',
   templateUrl: './post-details.component.html',
-  styleUrls: ['./post-details.component.css']
+  styleUrls: ['./post-details.component.css'],
 })
 export class PostDetailsComponent implements OnInit {
   posts: Post[] = [];
@@ -20,7 +22,7 @@ export class PostDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private http: HttpClient,
     private postService: PostService,
-    private commentService: CommentService
+    private commentService: CommentService,
   ) {
     this.id = this.route.snapshot.params['id'];
   }
@@ -33,8 +35,8 @@ export class PostDetailsComponent implements OnInit {
   loadPost() {
     this.postService.getPost(this.id).subscribe({
       next: (post: Post) => {
-        this.posts.push(post);
-      }
+        this.posts = [post];
+      },
     });
   }
 
@@ -43,7 +45,17 @@ export class PostDetailsComponent implements OnInit {
     this.commentService.getPostComments(this.id).subscribe({
       next: (comments: CommentResponse[]) => {
         this.comments = comments;
-      }
+      },
     });
+  }
+
+  handleCommentAdded() {
+    this.loadPost();
+    this.loadComments();
+    alertSuccess('Comment added successfully');
+  }
+
+  handleCommentNotAdded() {
+    alertFailure('Comment could not be added');
   }
 }

@@ -2,7 +2,7 @@
     <app-post2 [post]="post"></app-post2>
 </div>
 <div>
-    <app-add-comment (commentAdded)="loadComments()" [postId]="id"/>
+    <app-add-comment (commentAdded)="handleCommentAdded()" (commentNotAdded)="handleCommentNotAdded()" [postId]="id"/>
 </div>
 <div *ngFor="let comment of comments">
     <div class="my-2 mx-10">

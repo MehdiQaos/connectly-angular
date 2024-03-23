@@ -10,6 +10,7 @@ import { CommentService } from 'src/app/service/comment.service';
 export class AddCommentComponent {
   @Input() postId!: number;
   @Output() commentAdded = new EventEmitter<void>();
+  @Output() commentNotAdded = new EventEmitter<void>();
   content = '';
 
   constructor(
@@ -28,6 +29,10 @@ export class AddCommentComponent {
         this.content = '';
         console.log("comment added");
         this.commentAdded.emit();
+      },
+      error: () => {
+        console.log("comment not added");
+        this.commentNotAdded.emit();
       }
     });
   }

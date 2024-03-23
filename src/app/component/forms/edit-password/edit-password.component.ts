@@ -4,6 +4,8 @@ import { StoreService } from 'src/app/service/store.service';
 import { AuthService } from 'src/app/service/auth.service';
 import { MemberService } from 'src/app/service/member.service';
 
+import { alertFailure, alertSuccess } from 'src/app/utils/Alerts-utils';
+
 @Component({
   selector: 'app-edit-password',
   templateUrl: './edit-password.component.html',
@@ -11,7 +13,6 @@ import { MemberService } from 'src/app/service/member.service';
 })
 export class EditPasswordComponent implements OnInit {
   form: FormGroup;
-  errorMessage: string | null = null;
   isEditing = false;
 
   constructor(
@@ -56,20 +57,19 @@ export class EditPasswordComponent implements OnInit {
       this.form.get('password')?.disable();
       this.form.get('passwordConfirmation')?.disable();
     }
-    this.errorMessage = null;
   }
 
   updatePassword() {
     const oldPassword = this.form.get('oldPassword')?.value;
     const newPassword = this.form.get('password')?.value;
     const id = this.store.user.id;
-    this.errorMessage = null;
     this.memberService.updatePassword(oldPassword, newPassword, id).subscribe({
       next: () => {
+        alertSuccess('Password updated successfully');
         this.auth.logout();
       },
-      error: (err) => {
-        this.errorMessage = err.error.errors.password;
+      error: () => {
+        alertFailure('Password could not be updated');
       },
     });
   }

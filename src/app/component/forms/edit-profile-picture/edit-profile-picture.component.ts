@@ -1,9 +1,10 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Member } from 'src/app/model/Member';
+import { ImageService } from 'src/app/service/image.service';
 import { MemberService } from 'src/app/service/member.service';
 import { StoreService } from 'src/app/service/store.service';
+import { alertFailure, alertSuccess } from 'src/app/utils/Alerts-utils';
 
 @Component({
   selector: 'app-edit-profile-picture',
@@ -15,13 +16,12 @@ export class EditProfilePictureComponent {
   user: Member = this.store.user;
   selectedFile: File | null = null;
   form: FormGroup;
-  successMessage: string | null = null;
 
   constructor(
     private fb: FormBuilder,
     private store: StoreService,
     private memberService: MemberService,
-    private http: HttpClient,
+    public imageService: ImageService
   ) {
     this.form = this.fb.group({
       file: ['', Validators.required],
@@ -33,16 +33,17 @@ export class EditProfilePictureComponent {
       const formData = new FormData();
       formData.append('file', this.selectedFile, this.selectedFile.name);
 
-      this.http.post<Member>(`http://localhost:8080/api/members/${this.user.id}/picture`, formData).subscribe({
-        next: (response: Member) => {
-          this.store.setUser(response);
-          console.log('Profile picture updated successfully');
-          console.log(response);
-        },
-        error: (error) => {
-          console.error(error);
-        },
-    });
+      this.memberService
+        .updateProfilePicture(this.selectedFile, this.user.id)
+        .subscribe({
+          next: (response: Member) => {
+            this.store.setUser(response);
+            alertSuccess('Picture changed successfully');
+          },
+          error: () => {
+            alertFailure('Profile picture could not be updated');
+          },
+        });
     } else {
       console.log('No file selected');
     }
@@ -54,6 +55,7 @@ export class EditProfilePictureComponent {
       this.selectedFile = file[0];
       const url = URL.createObjectURL(this.selectedFile);
       this.picture.nativeElement.src = url;
+      this.picture.nativeElement.style.display = 'block';
     }
   }
 }
