@@ -13,6 +13,7 @@ import { StoreService } from 'src/app/service/store.service';
 })
 export class Post2Component implements OnInit {
   @Input() post!: Post;
+  isDropdownOpen = false;
   numOfLikes = 0;
   numOfComments: string | number = '';
   postId = 0;

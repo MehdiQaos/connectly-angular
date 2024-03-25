@@ -1,6 +1,13 @@
-<div class="flex w-full flex-col items-center divide-y rounded-md bg-white p-5 shadow-lg">
+<div
+  class="flex w-full flex-col items-center rounded-md bg-white p-5 shadow-lg"
+>
   <div class="relative mb-3">
-    <img *ngIf="selectedFile" [src]="imagePreview" class="object-cover rounded-md" alt="" />
+    <img
+      *ngIf="selectedFile"
+      [src]="imagePreview"
+      class="object-cover rounded-md"
+      alt=""
+    />
     <button
       *ngIf="selectedFile"
       type="button"
@@ -23,9 +30,13 @@
       </svg>
     </button>
   </div>
-  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="flex w-full flex-col divide-y">
+  <form
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()"
+    class="flex w-full flex-col"
+  >
     <div id="aaa" class="my-4 flex items-stretch">
-      <app-no-image *ngIf="!profilePictureUrl" [size]=6/>
+      <app-no-image *ngIf="!profilePictureUrl" [size]="6" />
       <img
         class="h-20 w-20 rounded-full"
         *ngIf="profilePictureUrl"
@@ -34,37 +45,54 @@
       />
       <input
         type="text"
-        class="block flex-grow indent-4 focus:outline-none"
+        class="block flex-grow indent-4 border-none focus:ring-0 focus:outline-none"
         formControlName="content"
         placeholder="What's on your mind?"
       />
     </div>
     <div class="flex items-center justify-between">
       <div class="flex mt-5">
-      <label class="rounded-md bg-blue-500 px-1 py-1 text-white">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="h-6 w-6"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
-          />
-        </svg>
+        <label class="rounded-md bg-blue-500 px-1 py-1 text-white">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="h-6 w-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
+            />
+          </svg>
 
-        <input (change)="onFileSelected($event)" formControlName="file" hidden type="file" />
-      </label>
-      <label class="ml-5">
-        public:
-        <input formControlName="isPublic" type="checkbox">
-      </label>
+          <input
+            (change)="onFileSelected($event)"
+            formControlName="file"
+            hidden
+            type="file"
+          />
+        </label>
+        <!-- <label class="inline-flex items-center cursor-pointer">
+          <span
+            class="mx-3 text-sm font-medium text-gray-900 dark:text-gray-300"
+            >Public: </span>
+          <input formControlName="isPublic" type="checkbox" class="sr-only peer" />
+          <div
+            class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:w-5 after:h-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"
+          ></div>
+        </label> -->
+        <!-- <label class="ml-5">
+          public:
+          <input formControlName="isPublic" type="checkbox" />
+        </label> -->
       </div>
-      <button type="submit" class="mt-5 rounded-md bg-blue-500 px-1 py-1 text-sm text-white">
+      <button
+        type="submit"
+        class="mt-5 rounded-md bg-blue-500 px-1 py-1 text-sm text-white"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

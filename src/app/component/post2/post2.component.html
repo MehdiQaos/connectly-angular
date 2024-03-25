@@ -1,5 +1,6 @@
-<div class="flex bg-white flex-col shadow-md border px-6 py-4 rounded-sm">
-  <div class="flex items-center mb-6">
+<div class="flex bg-white flex-col shadow-md border px-6 py-4 rounded-md">
+  <div class="flex justify-between items-center mb-6">
+      <div class="flex">
       <app-no-image *ngIf="!profilePictureUrl" [size]=6/>
       <img
         *ngIf="profilePictureUrl"
@@ -7,7 +8,7 @@
         alt="Avatar"
         class="w-12 h-12 rounded-full mr-4"
       />
-    <div>
+    <div class="ms-2">
       <a [routerLink]="['/profile', post.member.id]">
         <div class="text-lg font-medium text-gray-800">
           {{ post.member.firstName }} {{ post.member.lastName }}
@@ -15,6 +16,31 @@
         <div class="text-gray-500">{{ post.member.email }}</div>
       </a>
     </div>
+      </div>
+
+<!-- drop down -->
+  <div class=" relative inline-block text-left dropdown">
+    <span class="rounded-md shadow-sm"
+      ><button class="inline-flex justify-center w-full px py-2 text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out bg-white rounded-md hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800" 
+       type="button" aria-haspopup="true" aria-expanded="true" aria-controls="headlessui-menu-items-117"
+       >
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z" />
+        </svg>
+      </button
+    ></span>
+    <!-- <div class="opacity-0 invisible dropdown-menu transition-all duration-300 transform origin-top-right -translate-y-2 scale-95"> -->
+    <div class="opacity-0 invisible dropdown-menu transition-all duration-300 transform origin-top-right -translate-y-2 scale-95" [class.opacity-100]="isDropdownOpen" [class.visible]="isDropdownOpen">
+      <div class="absolute right-0 w-56 mt-2 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none" aria-labelledby="headlessui-menu-button-1" id="headlessui-menu-items-117" role="menu">
+        <div class="py-1">
+          <button tabindex="0" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left" role="menuitem" (click)="isDropdownOpen = false">Delete</button>
+          <button tabindex="0" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left" role="menuitem" (click)="isDropdownOpen = false">Report</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- ------------------------------------------------------------- -->
+
   </div>
   <div class="mb-2" *ngIf="imageUrl">
     <img class="rounded-lg" [src]="imageUrl" alt="">

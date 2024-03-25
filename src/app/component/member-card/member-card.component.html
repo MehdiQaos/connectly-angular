@@ -1,0 +1,24 @@
+    <div class="bg-white rounded-lg shadow-lg transform duration-200 easy-in-out">
+        <div class="p-5">
+        <div class="flex justify-center">
+            <img *ngIf="member.profilePictureLocation" class="h-32 w-32 bg-white rounded-full" [src]="imageService.getImageUrl(member.profilePictureLocation)" alt="" />
+            <app-no-image *ngIf="!member.profilePictureLocation" [size]="16"/>
+        </div>
+            <div class="h-48 overflow-hidden text-center">
+                <h2 class="text-gray-800 text-3xl font-bold">{{ member.firstName }} {{ member.lastName }}</h2>
+                <h2 class="text-gray-400 mt-2">{{ member.email }}</h2>
+                <p class="my-2 overflow-hidden text-gray-500 text-sm">{{ member.location }}</p>
+                <p class="my-2 overflow-hidden text-gray-500 text-sm">{{ member.profession }}</p>
+            </div>
+        </div>
+        <hr class="mt-6" />
+        <div class="flex  bg-gray-50 ">
+            <div class="text-center w-1/2 p-4 hover:bg-gray-100 cursor-pointer">
+                <p><span class="font-semibold">2.5 k </span> Followers</p>
+            </div>
+            <div class="border"></div>
+            <div class="text-center w-1/2 p-4 hover:bg-gray-100 cursor-pointer">
+                <p> <span class="font-semibold">2.0 k </span> Following</p>
+            </div>
+        </div>
+    </div>

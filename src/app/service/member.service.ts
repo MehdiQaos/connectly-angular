@@ -62,4 +62,10 @@ export class MemberService {
     formData.append('file', file, file.name);
     return this.httpClient.post<Member>(url, formData);
   }
+
+  searchMembers(query: string): Observable<Member[]> {
+    const url = `${this.url}/search`;
+    const params = new HttpParams().set('query', query);
+    return this.httpClient.get<Member[]>(url, { params });
+  }
 }

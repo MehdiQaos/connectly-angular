@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Post } from 'src/app/model/Post';
 import { ImageService } from 'src/app/service/image.service';
 import { PostService } from 'src/app/service/post.service';
 import { StoreService } from 'src/app/service/store.service';
@@ -18,6 +19,7 @@ export class CreatePostComponent {
   profilePictureUrl: string | null = null;
   user;
   form: FormGroup;
+  post = new Post();
 
   constructor(
     private fb: FormBuilder,
@@ -32,7 +34,6 @@ export class CreatePostComponent {
     this.form = this.fb.group({
       content: ['', Validators.required],
       file: [''],
-      isPublic: [true, Validators.required],
     });
   }
 
@@ -41,20 +42,21 @@ export class CreatePostComponent {
     if (file) {
       this.selectedFile = file[0];
       this.imagePreview = URL.createObjectURL(this.selectedFile);
-      this.form.patchValue({ file: this.selectedFile });
+      // this.form.patchValue({ file: this.selectedFile });
     }
   }
 
   onRemoveImage() {
     this.selectedFile = null;
     this.imagePreview = null;
-    this.form.patchValue({ file: null });
+    // this.form.patchValue({ file: null });
   }
 
   onSubmit() {
+    if (!this.form.get('content')?.value)
+      return;
     const formData = new FormData();
     formData.append('content', this.form.get('content')?.value);
-    formData.append('isPublic', this.form.get('isPublic')?.value);
     if (this.selectedFile) {
       formData.append('file', this.selectedFile, this.selectedFile.name);
     }

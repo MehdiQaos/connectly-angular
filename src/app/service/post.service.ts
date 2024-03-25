@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { EnvService } from './env.service';
 import { Post } from '../model/Post';
@@ -45,5 +45,11 @@ export class PostService {
   unlikePost(memberId: number, postId: number): Observable<Post> {
     const url = `${this.url}/${memberId}/unlike/${postId}`;
     return this.httpClient.post<Post>(url, null);
+  }
+
+  searchPosts(query: string): Observable<Post[]> {
+    const url = `${this.url}/search`;
+    const params = new HttpParams().set('query', query);
+    return this.httpClient.get<Post[]>(url, { params });
   }
 }

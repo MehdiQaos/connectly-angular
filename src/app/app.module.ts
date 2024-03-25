@@ -8,8 +8,6 @@ import { PostComponent } from './component/post/post.component';
 import { CommentComponent } from './component/comment/comment.component';
 import { Post2Component } from './component/post2/post2.component';
 import { NavbarComponent } from './component/navbar/navbar.component';
-import { Sidebar2Component } from './component/sidebars/sidebar2/sidebar2.component';
-import { Sidebar1Component } from './component/sidebars/sidebar1/sidebar1.component';
 import { EditprofileComponent } from './component/editprofile/editprofile.component';
 import { ImageformComponent } from './component/imageform/imageform.component';
 import { PostsComponent } from './component/posts/posts.component';
@@ -28,6 +26,14 @@ import { EditInfosComponent } from './component/forms/edit-infos/edit-infos.comp
 import { EditProfilePictureComponent } from './component/forms/edit-profile-picture/edit-profile-picture.component';
 import { CreatePostComponent } from './component/forms/create-post/create-post.component';
 import { NoImageComponent } from './component/images/no-image/no-image.component';
+import { SearchMemberComponent } from './component/search-member/search-member.component';
+import { MemberCardComponent } from './component/member-card/member-card.component';
+import { SearchPostComponent } from './component/search-post/search-post.component';
+import { Navbar2Component } from './component/layout/navbar2/navbar2.component';
+import { SidebarComponent } from './component/layout/sidebar/sidebar.component';
+import { LayoutComponent } from './layout/layout.component';
+import { EventsComponent } from './component/events/events.component';
+import { NotificationComponent } from './component/notification/notification.component';
 
 @NgModule({
   declarations: [
@@ -36,8 +42,6 @@ import { NoImageComponent } from './component/images/no-image/no-image.component
     CommentComponent,
     Post2Component,
     NavbarComponent,
-    Sidebar2Component,
-    Sidebar1Component,
     EditprofileComponent,
     ImageformComponent,
     PostsComponent,
@@ -53,6 +57,14 @@ import { NoImageComponent } from './component/images/no-image/no-image.component
     EditProfilePictureComponent,
     CreatePostComponent,
     NoImageComponent,
+    SearchMemberComponent,
+    MemberCardComponent,
+    SearchPostComponent,
+    Navbar2Component,
+    SidebarComponent,
+    LayoutComponent,
+    EventsComponent,
+    NotificationComponent,
   ],
   imports: [
     BrowserModule,

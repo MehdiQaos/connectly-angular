@@ -8,15 +8,23 @@ import { NoAuthGuard } from './guard/no-auth.guard';
 import { AuthGuard } from './guard/auth.guard';
 import { ProfileComponent } from './component/profile/profile.component';
 import { EditprofileComponent } from './component/editprofile/editprofile.component';
+import { SearchMemberComponent } from './component/search-member/search-member.component';
+import { SearchPostComponent } from './component/search-post/search-post.component';
+import { LayoutComponent } from './layout/layout.component';
 
 const routes: Routes = [
-  { path: '', component: PostsComponent, canActivate: [AuthGuard] },
-  { path: 'profile/edit', component: EditprofileComponent, canActivate: [AuthGuard] },
-  { path: 'profile/:id', component: ProfileComponent, canActivate: [AuthGuard] },
-  { path: 'posts/:id', component: PostDetailsComponent, canActivate: [AuthGuard] },
   { path: 'register', component: RegisterComponent, canActivate: [NoAuthGuard] },
   { path: 'login', component: LoginComponent, canActivate: [NoAuthGuard] },
-  { path: '**', redirectTo: '' },
+  { path: '', component: LayoutComponent, canActivate: [AuthGuard], children: [
+      { path: 'posts', component: PostsComponent, canActivate: [AuthGuard] },
+      { path: 'profile/edit', component: EditprofileComponent, canActivate: [AuthGuard] },
+      { path: 'profile/:id', component: ProfileComponent, canActivate: [AuthGuard] },
+      { path: 'posts/search', component: SearchPostComponent, canActivate: [AuthGuard] },
+      { path: 'posts/:id', component: PostDetailsComponent, canActivate: [AuthGuard] },
+      { path: 'members/search', component: SearchMemberComponent, canActivate: [AuthGuard] },
+      { path: '**', redirectTo: 'posts' },
+    ]
+  },
 ];
 
 @NgModule({
