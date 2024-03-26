@@ -14,16 +14,36 @@
       </div>
       <div class="flex items-center">
           <div class="flex items-center ms-3">
-            <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="button" data-drawer-target="drawer-right-example" data-drawer-show="drawer-right-example" data-drawer-placement="right" aria-controls="drawer-right-example">notifications</button>
-            <div>
-              <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" aria-expanded="false" data-dropdown-toggle="dropdown-user">
+            <!-- <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="button" data-drawer-target="notifications-offcanvas" data-drawer-show="notifications-offcanvas" data-drawer-placement="right" aria-controls="notifications-offcanvas">notifications</button> -->
+            <div class="flex items-center space-x-2">
+              <button (click)="toggleDropDown()" type="button" class="flex relative text-sm bg-gray-800 rounded-full ring-4 focus:ring-gray-300 dark:focus:ring-gray-600">
                 <span class="sr-only">Open user menu</span>
                 <!-- <img class="w-8 h-8 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo"> -->
-              <img class="h-8 w-8 rounded-full" *ngIf="store.user?.profilePictureLocation" [src]="imageService.getImageUrl(this.store.user?.profilePictureLocation)" alt="">
-              <app-no-image *ngIf="!store.user?.profilePictureLocation" [size]=4/>
+                <img class="h-8 w-8 rounded-full" *ngIf="store.user?.profilePictureLocation" [src]="imageService.getImageUrl(this.store.user?.profilePictureLocation)" alt="">
+                <app-no-image *ngIf="!store.user?.profilePictureLocation" [size]=4/>
+            <!-- ----------------------------------------------------------------- -->
+            <div [hidden]="hideDropDown" class="z-50 absolute w-32 top-10 right-1 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600" id="mehdidropdown">
+              <div class="px-4 py-3" role="none">
+                <p class="text-sm text-gray-900 dark:text-white" role="none">
+                    {{ store.user.firstName + ' ' + store.user.lastName }}
+                </p>
+                <p class="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">
+                    {{ store.user.email }}
+                </p>
+              </div>
+              <ul class="py-1" role="none">
+                <li>
+                  <a [routerLink]="['/profile', store.user.id]" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Profile</a>
+                </li>
+                <li>
+                  <button (click)="auth.logout()" class="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Sign out</button>
+                </li>
+              </ul>
+            </div>
+            <!-- ----------------------------------------------------------------- -->
               </button>
             </div>
-            <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown-user">
+            <!-- <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown-user">
               <div class="px-4 py-3" role="none">
                 <p class="text-sm text-gray-900 dark:text-white" role="none">
                     {{ store.user.firstName + ' ' + store.user.lastName }}
@@ -40,7 +60,7 @@
                   <a (click)="auth.logout()" href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Sign out</a>
                 </li>
               </ul>
-            </div>
+            </div> -->
           </div>
         </div>
     </div>

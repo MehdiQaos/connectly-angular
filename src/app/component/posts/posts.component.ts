@@ -32,4 +32,9 @@ export class PostsComponent implements OnInit {
       this.posts = posts;
     });
   }
+
+  onPostDelete(postId: number) {
+    console.log('Post deleted id: ', postId);
+    this.loadPosts();
+  }
 }

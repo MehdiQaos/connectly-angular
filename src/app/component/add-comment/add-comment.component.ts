@@ -19,6 +19,9 @@ export class AddCommentComponent {
 
   addComment(event: Event) {
     event.preventDefault();
+    if (this.content.trim() === '')
+      return;
+
     const comment: CommentRequest = {
       content: this.content,
       postId: this.postId,

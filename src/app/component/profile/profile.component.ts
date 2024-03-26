@@ -36,12 +36,14 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.paramsSubscription = this.route.params.subscribe((params) => {
       this.profileId = params['id'];
       this.loadProfile(this.profileId);
-      this.postService
-        .getMemberPosts(this.profileId)
-        .subscribe((posts: Post[]) => {
-          this.posts = posts;
-        });
+      this.loadPosts();
       this.isOwnProfile = this.profileId == this.storeService.user.id;
+    });
+  }
+
+  loadPosts() {
+    this.postService.getMemberPosts(this.profileId).subscribe((posts: Post[]) => {
+      this.posts = posts;
     });
   }
 
@@ -103,5 +105,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   goToEditProfile() {
     this.router.navigate(['/profile/edit']);
+  }
+
+  onDeletePost() {
+    this.loadProfile(this.profileId);
+    this.loadPosts();
   }
 }

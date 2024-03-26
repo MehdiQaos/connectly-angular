@@ -52,4 +52,9 @@ export class PostService {
     const params = new HttpParams().set('query', query);
     return this.httpClient.get<Post[]>(url, { params });
   }
+
+  removePost(postId: number): Observable<Post> {
+    const url = `${this.url}/${postId}`;
+    return this.httpClient.delete<Post>(url);
+  }
 }

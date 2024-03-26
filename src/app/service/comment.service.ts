@@ -25,4 +25,9 @@ export class CommentService {
   addComment(comment: CommentRequest): Observable<CommentResponse> {
     return this.httpClient.post<CommentResponse>(this.url, comment);
   }
+
+  deleteComment(id: number): Observable<CommentResponse> {
+    const url = `${this.url}/${id}`;
+    return this.httpClient.delete<CommentResponse>(url);
+  }
 }

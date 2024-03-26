@@ -1,10 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommentResponse } from 'src/app/model/Comment';
 import { Post } from 'src/app/model/Post';
 import { CommentService } from 'src/app/service/comment.service';
 import { ImageService } from 'src/app/service/image.service';
 import { PostService } from 'src/app/service/post.service';
 import { StoreService } from 'src/app/service/store.service';
+import { alertFailure, alertSuccess } from 'src/app/utils/Alerts-utils';
 
 @Component({
   selector: 'app-post2',
@@ -13,6 +14,8 @@ import { StoreService } from 'src/app/service/store.service';
 })
 export class Post2Component implements OnInit {
   @Input() post!: Post;
+  @Output() delete = new EventEmitter<number>();
+
   isDropdownOpen = false;
   numOfLikes = 0;
   numOfComments: string | number = '';
@@ -20,6 +23,9 @@ export class Post2Component implements OnInit {
   isLiked = false;
   imageUrl: string | null = null;
   profilePictureUrl: string | null = null;
+
+  showReportModal = false;
+  showRemoveModal = false;
 
   constructor(
     private commentService: CommentService,
@@ -58,6 +64,28 @@ export class Post2Component implements OnInit {
       next: () => {
         this.numOfLikes -= this.isLiked ? 1 : 0;
         this.isLiked = false;
+      }
+    });
+  }
+
+  toggleReportModal() {
+    this.showReportModal = !this.showReportModal;
+  }
+
+  toggleRemoveModal() {
+    this.showRemoveModal = !this.showRemoveModal;
+  }
+
+  removePost() {
+    this.postService.removePost(this.post.id).subscribe({
+      next: () => {
+        alertSuccess('Post removed successfully');
+        this.toggleRemoveModal();
+        this.delete.emit(this.post.id);
+      },
+      error: (error) => {
+        console.log(error);
+        alertFailure('Failed to remove post');
       }
     });
   }

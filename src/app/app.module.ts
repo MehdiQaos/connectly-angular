@@ -34,6 +34,7 @@ import { SidebarComponent } from './component/layout/sidebar/sidebar.component';
 import { LayoutComponent } from './layout/layout.component';
 import { EventsComponent } from './component/events/events.component';
 import { NotificationComponent } from './component/notification/notification.component';
+import { OffcanvasNotificationsComponent } from './component/offcanvas-notifications/offcanvas-notifications.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import { NotificationComponent } from './component/notification/notification.com
     LayoutComponent,
     EventsComponent,
     NotificationComponent,
+    OffcanvasNotificationsComponent,
   ],
   imports: [
     BrowserModule,

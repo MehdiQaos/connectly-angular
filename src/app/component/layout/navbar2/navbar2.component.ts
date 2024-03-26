@@ -10,6 +10,7 @@ import { StoreService } from 'src/app/service/store.service';
   styleUrls: ['./navbar2.component.css']
 })
 export class Navbar2Component {
+  hideDropDown = true;
 
   constructor(
     public auth: AuthService,
@@ -20,7 +21,10 @@ export class Navbar2Component {
 
   logout() {
     this.auth.logout();
-    this.router.navigate(['/login']);
+    // this.router.navigate(['/login']);
   }
 
+  toggleDropDown() {
+    this.hideDropDown = !this.hideDropDown;
+  }
 }

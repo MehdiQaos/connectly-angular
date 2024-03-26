@@ -101,7 +101,7 @@
   </div>
   <div class="my-5" *ngFor="let post of posts">
     <div class="my-3">
-      <app-post2 [post]="post"></app-post2>
+      <app-post2 (delete)="onDeletePost()" [post]="post"></app-post2>
     </div>
   </div>
 </div>

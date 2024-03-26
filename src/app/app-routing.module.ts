@@ -11,6 +11,7 @@ import { EditprofileComponent } from './component/editprofile/editprofile.compon
 import { SearchMemberComponent } from './component/search-member/search-member.component';
 import { SearchPostComponent } from './component/search-post/search-post.component';
 import { LayoutComponent } from './layout/layout.component';
+import { EventsComponent } from './component/events/events.component';
 
 const routes: Routes = [
   { path: 'register', component: RegisterComponent, canActivate: [NoAuthGuard] },
@@ -21,6 +22,7 @@ const routes: Routes = [
       { path: 'profile/:id', component: ProfileComponent, canActivate: [AuthGuard] },
       { path: 'posts/search', component: SearchPostComponent, canActivate: [AuthGuard] },
       { path: 'posts/:id', component: PostDetailsComponent, canActivate: [AuthGuard] },
+      { path: 'events', component: EventsComponent, canActivate: [AuthGuard] },
       { path: 'members/search', component: SearchMemberComponent, canActivate: [AuthGuard] },
       { path: '**', redirectTo: 'posts' },
     ]

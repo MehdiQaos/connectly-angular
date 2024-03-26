@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommentResponse } from 'src/app/model/Comment';
 import { Post } from 'src/app/model/Post';
 import { CommentService } from 'src/app/service/comment.service';
@@ -23,6 +23,7 @@ export class PostDetailsComponent implements OnInit {
     private http: HttpClient,
     private postService: PostService,
     private commentService: CommentService,
+    private router: Router
   ) {
     this.id = this.route.snapshot.params['id'];
   }
@@ -57,5 +58,16 @@ export class PostDetailsComponent implements OnInit {
 
   handleCommentNotAdded() {
     alertFailure('Comment could not be added');
+  }
+
+  onDeleteComment(commentId: number) {
+    console.log('Comment deleted id:', commentId);
+    this.loadPost();
+    this.loadComments();
+  }
+
+  onPostDelete(postId: number) {
+    console.log('Post deleted id: ', postId);
+    this.router.navigate(['/posts']);
   }
 }
