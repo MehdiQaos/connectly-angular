@@ -1,7 +1,9 @@
 <div class="flex bg-white shadow-lg rounded-lg"><!--horizantil margin is just for display-->
    <div class="flex w-full justify-between px-4 py-6">
       <div class="flex items-start">
-        <img class="w-12 h-12 rounded-full object-cover mr-4 shadow" src="https://images.unsplash.com/photo-1542156822-6924d1a71ace?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="avatar">
+        <!-- <img class="w-12 h-12 rounded-full object-cover mr-4 shadow" src="https://images.unsplash.com/photo-1542156822-6924d1a71ace?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="avatar"> -->
+        <img *ngIf="profilePictureUrl" class="w-12 h-12 rounded-full object-cover mr-4 shadow" [src]="profilePictureUrl" alt="avatar">
+        <app-no-image *ngIf="!profilePictureUrl" [size]="6"></app-no-image>
         <div class="w-full">
             <div class="flex items-center justify-between">
                 <h2 class="text-lg font-semibold text-gray-900 -mt-1">{{ comment.member.firstName }} {{ comment.member.lastName }}</h2>

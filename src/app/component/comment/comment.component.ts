@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommentResponse } from 'src/app/model/Comment';
 import { CommentService } from 'src/app/service/comment.service';
+import { ImageService } from 'src/app/service/image.service';
 import { alertFailure, alertSuccess } from 'src/app/utils/Alerts-utils';
 
 @Component({
@@ -8,15 +9,21 @@ import { alertFailure, alertSuccess } from 'src/app/utils/Alerts-utils';
   templateUrl: './comment.component.html',
   styleUrls: ['./comment.component.css']
 })
-export class CommentComponent {
+export class CommentComponent implements OnInit {
   @Input() comment!: CommentResponse;
   @Output() deleteComment = new EventEmitter<number>();
   showRemoveModal = false;
   showDropDown = false;
+  profilePictureUrl: string | null = null;
 
   constructor(
     private commentService: CommentService,
+    public imageService: ImageService
   ) { }
+
+  ngOnInit(): void {
+    this.profilePictureUrl = this.imageService.getImageUrl(this.comment.member.profilePictureLocation);
+  }
 
   toggleRemoveModal() {
     this.showRemoveModal = !this.showRemoveModal;

@@ -48,8 +48,8 @@
   <a [routerLink]="['/posts', post.id]">
     <p class="text-lg leading-relaxed mb-6">{{ post.content }}</p>
   </a>
-  <div class="mt-4 flex justify-between items-center">
-    <div class="flex">
+  <div class="mt-4 flex justify-start space-x-3 items-center">
+    <!-- <div class="flex"> -->
       <div class="flex mr-2 text-gray-700 text-sm hover:text-red-600">
         <svg
           *ngIf="!isLiked"
@@ -99,8 +99,8 @@
 
         <span>{{ numOfComments }}</span>
       </div>
-    </div>
-    <div class="flex mr-2 text-gray-700 text-sm">
+    <!-- </div> -->
+    <!-- <div class="flex mr-2 text-gray-700 text-sm">
       <svg
         fill="none"
         viewBox="0 0 24 24"
@@ -115,7 +115,7 @@
         />
       </svg>
       <span>share</span>
-    </div>
+    </div> -->
   </div>
 </div>
 
