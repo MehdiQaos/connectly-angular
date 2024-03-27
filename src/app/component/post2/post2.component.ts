@@ -4,6 +4,7 @@ import { Post } from 'src/app/model/Post';
 import { CommentService } from 'src/app/service/comment.service';
 import { ImageService } from 'src/app/service/image.service';
 import { PostService } from 'src/app/service/post.service';
+import { ReportService } from 'src/app/service/report.service';
 import { StoreService } from 'src/app/service/store.service';
 import { alertFailure, alertSuccess } from 'src/app/utils/Alerts-utils';
 
@@ -23,6 +24,7 @@ export class Post2Component implements OnInit {
   isLiked = false;
   imageUrl: string | null = null;
   profilePictureUrl: string | null = null;
+  reportReason = '';
 
   showReportModal = false;
   showRemoveModal = false;
@@ -31,7 +33,8 @@ export class Post2Component implements OnInit {
     private commentService: CommentService,
     private postService: PostService,
     private imageService: ImageService,
-    private store: StoreService
+    private store: StoreService,
+    private reportService: ReportService,
   ) {
 
   }
@@ -51,7 +54,7 @@ export class Post2Component implements OnInit {
   }
 
   like() {
-    this.postService.likePost(1, this.post.id).subscribe({
+    this.postService.likePost(this.store.user.id, this.post.id).subscribe({
       next: () => {
         this.numOfLikes += this.isLiked ? 0 : 1;
         this.isLiked = true;
@@ -60,7 +63,7 @@ export class Post2Component implements OnInit {
   }
 
   unlike() {
-    this.postService.unlikePost(1, this.post.id).subscribe({
+    this.postService.unlikePost(this.store.user.id, this.post.id).subscribe({
       next: () => {
         this.numOfLikes -= this.isLiked ? 1 : 0;
         this.isLiked = false;
@@ -86,6 +89,24 @@ export class Post2Component implements OnInit {
       error: (error) => {
         console.log(error);
         alertFailure('Failed to remove post');
+      }
+    });
+  }
+
+  reportPost() {
+    if (this.reportReason.trim() === '')
+      return;
+    const postId = this.post.id;
+    const userId = this.store.user.id;
+    const reason = this.reportReason;
+    this.reportService.reportPost(postId, userId, reason).subscribe({
+      next: () => {
+        alertSuccess('Post reported successfully');
+        this.toggleReportModal();
+      },
+      error: (error) => {
+        console.log(error);
+        alertFailure('Failed to report post');
       }
     });
   }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/service/auth.service';
 import { EventsService } from 'src/app/service/events.service';
 import { StoreService } from 'src/app/service/store.service';
 
@@ -8,16 +9,10 @@ import { StoreService } from 'src/app/service/store.service';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent {
-  // notificationsCount = 0;
 
   constructor(
     public store: StoreService,
     public eventservice: EventsService,
+    public auth: AuthService,
   ) {}
-
-  // ngOnInit(): void {
-  //   this.eventservice.getMemberEvents(this.store.user.id).subscribe(events => {
-  //     this.notificationsCount = events.length;
-  //   });
-  // }
 }

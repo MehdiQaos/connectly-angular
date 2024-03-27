@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Member } from 'src/app/model/Member';
+import { Member, Profile } from 'src/app/model/Member';
 import { MemberService } from 'src/app/service/member.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { MemberService } from 'src/app/service/member.service';
 })
 export class SearchMemberComponent implements OnInit {
   query = '';
-  members: Member[] = [];
+  members: Profile[] = [];
 
   constructor(
     private memberService: MemberService,

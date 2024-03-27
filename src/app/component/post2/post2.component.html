@@ -48,7 +48,7 @@
   <a [routerLink]="['/posts', post.id]">
     <p class="text-lg leading-relaxed mb-6">{{ post.content }}</p>
   </a>
-  <div class="mt-4 flex justify-start space-x-3 items-center">
+  <div class="mt-4 flex justify-start space-x-1 items-center">
     <!-- <div class="flex"> -->
       <div class="flex mr-2 text-gray-700 text-sm hover:text-red-600">
         <svg
@@ -173,6 +173,7 @@
         </h3>
 
         <textarea
+          [(ngModel)]="reportReason"
           id="message"
           rows="3"
           class="block mb-4 p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -180,6 +181,7 @@
         ></textarea>
 
         <button
+          (click)="reportPost()"
           data-modal-hide="popup-modal"
           type="button"
           class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center"

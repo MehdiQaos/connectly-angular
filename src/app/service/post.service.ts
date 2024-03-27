@@ -27,6 +27,16 @@ export class PostService {
     return this.httpClient.get<Post[]>(url);
   }
 
+  getTimeLinePosts(memberId: number): Observable<Post[]> {
+    const url = `${this.url}/timeline/${memberId}`;
+    return this.httpClient.get<Post[]>(url);
+  }
+
+  getSuggestions(memberId: number): Observable<Post[]> {
+    const url = `${this.url}/suggestions/${memberId}`;
+    return this.httpClient.get<Post[]>(url);
+  }
+
   createPost(memberId: number, formData: FormData): Observable<Post> {
     const url = `${this.url}/${memberId}`;
     return this.httpClient.post<Post>(url, formData);

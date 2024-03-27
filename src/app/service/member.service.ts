@@ -63,9 +63,9 @@ export class MemberService {
     return this.httpClient.post<Member>(url, formData);
   }
 
-  searchMembers(query: string): Observable<Member[]> {
+  searchMembers(query: string): Observable<Profile[]> {
     const url = `${this.url}/search`;
     const params = new HttpParams().set('query', query);
-    return this.httpClient.get<Member[]>(url, { params });
+    return this.httpClient.get<Profile[]>(url, { params });
   }
 }

@@ -16,9 +16,8 @@
           <div class="flex items-center ms-3">
             <!-- <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="button" data-drawer-target="notifications-offcanvas" data-drawer-show="notifications-offcanvas" data-drawer-placement="right" aria-controls="notifications-offcanvas">notifications</button> -->
             <div class="flex items-center space-x-2">
-              <button (click)="toggleDropDown()" type="button" class="flex relative text-sm bg-gray-800 rounded-full ring-4 focus:ring-gray-300 dark:focus:ring-gray-600">
+              <button (click)="toggleDropDown()" type="button" class="flex relative text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600">
                 <span class="sr-only">Open user menu</span>
-                <!-- <img class="w-8 h-8 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo"> -->
                 <img class="h-8 w-8 rounded-full" *ngIf="store.user?.profilePictureLocation" [src]="imageService.getImageUrl(this.store.user?.profilePictureLocation)" alt="">
                 <app-no-image *ngIf="!store.user?.profilePictureLocation" [size]=4/>
             <!-- ----------------------------------------------------------------- -->
