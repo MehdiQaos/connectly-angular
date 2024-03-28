@@ -43,7 +43,7 @@ export class Post2Component implements OnInit {
     this.imageUrl = this.imageService.getImageUrl(this.post.imageLocation);
     this.profilePictureUrl = this.imageService.getImageUrl(this.post.member.profilePictureLocation);
     this.numOfLikes = this.post.likedMembers.length;
-    this.isLiked = this.post.likedMembers.some((member) => member.id === 1);
+    this.isLiked = this.post.likedMembers.some((member) => member.id === this.store.user.id);
     const id = this.post.id;
     if (id == null) return;
     this.commentService.getPostComments(id).subscribe({
