@@ -1,7 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommentResponse } from 'src/app/model/Comment';
+import { AuthService } from 'src/app/service/auth.service';
 import { CommentService } from 'src/app/service/comment.service';
 import { ImageService } from 'src/app/service/image.service';
+import { StoreService } from 'src/app/service/store.service';
 import { alertFailure, alertSuccess } from 'src/app/utils/Alerts-utils';
 
 @Component({
@@ -18,7 +20,9 @@ export class CommentComponent implements OnInit {
 
   constructor(
     private commentService: CommentService,
-    public imageService: ImageService
+    public imageService: ImageService,
+    private store: StoreService,
+    private auth: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -64,5 +68,9 @@ export class CommentComponent implements OnInit {
         console.error('There was an error!', error);
       }
     });
+  }
+
+  isOwnOrIsAdmin() {
+    return (this.comment.member.id === this.store.user.id) || this.auth.isAdmin();
   }
 }

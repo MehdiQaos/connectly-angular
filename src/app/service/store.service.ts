@@ -2,14 +2,11 @@ import { Injectable } from '@angular/core';
 import { Member } from '../model/Member';
 import { EnvService } from './env.service';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StoreService {
-  private _userChange: BehaviorSubject<any> = new BehaviorSubject(null);
-  public userChange = this._userChange.asObservable();
 
   constructor(
     private envService: EnvService,
@@ -23,7 +20,6 @@ export class StoreService {
 
   setUser(user: Member | null) {
     localStorage.setItem('user', JSON.stringify(user));
-    this._userChange.next(user);
   }
 
   clearUser() {

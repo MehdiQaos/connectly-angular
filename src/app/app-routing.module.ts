@@ -13,6 +13,7 @@ import { SearchPostComponent } from './component/search-post/search-post.compone
 import { LayoutComponent } from './layout/layout.component';
 import { EventsComponent } from './component/events/events.component';
 import { ReportsComponent } from './component/reports/reports.component';
+import { AdminGuard } from './guard/is-admin.guard';
 
 const routes: Routes = [
   { path: 'register', component: RegisterComponent, canActivate: [NoAuthGuard] },
@@ -25,8 +26,8 @@ const routes: Routes = [
       { path: 'posts/:id', component: PostDetailsComponent, canActivate: [AuthGuard] },
       { path: 'events', component: EventsComponent, canActivate: [AuthGuard] },
       { path: 'members/search', component: SearchMemberComponent, canActivate: [AuthGuard] },
-      { path: 'reports', component: ReportsComponent, canActivate: [AuthGuard] },
-      { path: '**', redirectTo: 'posts' },
+      { path: 'reports', component: ReportsComponent, canActivate: [AuthGuard, AdminGuard] },
+      { path: '**', redirectTo: 'login' },
     ]
   },
 ];

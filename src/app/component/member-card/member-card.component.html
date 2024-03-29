@@ -1,10 +1,10 @@
     <div class="bg-white rounded-lg shadow-lg transform duration-200 easy-in-out">
         <div class="p-5">
-        <div class="flex justify-center">
+        <div [routerLink]="['/profile', profile.member.id]" class="flex justify-center hover:cursor-pointer">
             <img *ngIf="profile.member.profilePictureLocation" class="h-32 w-32 bg-white rounded-full" [src]="imageService.getImageUrl(profile.member.profilePictureLocation)" alt="" />
             <app-no-image *ngIf="!profile.member.profilePictureLocation" [size]="16"/>
         </div>
-            <div class="h-48 overflow-hidden text-center">
+            <div [routerLink]="['/profile', profile.member.id]" class="h-48 hover:cursor-pointer overflow-hidden text-center">
                 <h2 class="text-gray-800 text-3xl font-bold">{{ profile.member.firstName }} {{ profile.member.lastName }}</h2>
                 <h2 class="text-gray-400 mt-2">{{ profile.member.email }}</h2>
                 <p class="my-2 overflow-hidden text-gray-500 text-sm">{{ profile.member.location }}</p>

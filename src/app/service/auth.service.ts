@@ -26,7 +26,7 @@ export class AuthService {
     this.http.get(url, httpOptions).subscribe((res: any) => {
       console.log(res);
       this.store.setUser(res);
-      this.router.navigate(['/']);
+      this.router.navigate(['/posts']);
     });
   }
 
@@ -38,7 +38,6 @@ export class AuthService {
       .subscribe({
         next: (res) => {
           this.processTokenAndRedirect(res);
-          // this.router.navigate(['/']);
         },
         error: (err) => {
           console.error(err);
@@ -86,20 +85,13 @@ export class AuthService {
     );
   }
 
-  isJury() {
-    return (
-      this.store.isAuthenticated() &&
-      (this.store.getAuthorities().includes('ROLE_ADMIN') ||
-        this.store.getAuthorities().includes('ROLE_JURY'))
-    );
-  }
-
   isUser() {
-    return (
-      this.store.isAuthenticated() &&
-      (this.store.getAuthorities().includes('ROLE_ADMIN') ||
-        this.store.getAuthorities().includes('ROLE_JURY') ||
-        this.store.getAuthorities().includes('ROLE_USER'))
-    );
+    return this.store.isAuthenticated() &&
+    this.store.getAuthorities().includes('ROLE_USER');
+    // return (
+    //   this.store.isAuthenticated() &&
+    //   (this.store.getAuthorities().includes('ROLE_ADMIN') ||
+    //     this.store.getAuthorities().includes('ROLE_USER'))
+    // );
   }
 }

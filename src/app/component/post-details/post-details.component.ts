@@ -38,6 +38,9 @@ export class PostDetailsComponent implements OnInit {
       next: (post: Post) => {
         this.posts = [post];
       },
+      error: () => {
+        this.router.navigate(['/posts']);
+      }
     });
   }
 

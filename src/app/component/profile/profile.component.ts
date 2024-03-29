@@ -86,23 +86,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
       });
   }
 
-  toggleFollow() {
-    if (this.isFollowing) {
-      this.memberService
-        .unfollowMember(this.storeService.user.id, this.profileId)
-        .subscribe(() => {
-          this.isFollowing = false;
-        });
-    } else {
-      this.memberService
-        .followMember(this.storeService.user.id, this.profileId)
-        .subscribe(() => {
-          this.isFollowing = true;
-        });
-    }
-    this.loadProfile(this.profileId);
-  }
-
   goToEditProfile() {
     this.router.navigate(['/profile/edit']);
   }

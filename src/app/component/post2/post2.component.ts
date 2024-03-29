@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommentResponse } from 'src/app/model/Comment';
 import { Post } from 'src/app/model/Post';
+import { AuthService } from 'src/app/service/auth.service';
 import { CommentService } from 'src/app/service/comment.service';
 import { ImageService } from 'src/app/service/image.service';
 import { PostService } from 'src/app/service/post.service';
@@ -35,9 +36,8 @@ export class Post2Component implements OnInit {
     private imageService: ImageService,
     private store: StoreService,
     private reportService: ReportService,
-  ) {
-
-  }
+    private auth: AuthService
+  ) {}
 
   ngOnInit() {
     this.imageUrl = this.imageService.getImageUrl(this.post.imageLocation);
@@ -109,5 +109,13 @@ export class Post2Component implements OnInit {
         alertFailure('Failed to report post');
       }
     });
+  }
+
+  isOwnOrIsAdmin() {
+    return this.post.member.id === this.store.user.id || this.auth.isAdmin();
+  }
+
+  isUser() {
+    return this.auth.isUser();
   }
 }

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommentRequest } from 'src/app/model/Comment';
 import { CommentService } from 'src/app/service/comment.service';
+import { StoreService } from 'src/app/service/store.service';
 
 @Component({
   selector: 'app-add-comment',
@@ -14,7 +15,8 @@ export class AddCommentComponent {
   content = '';
 
   constructor(
-    private commentService: CommentService
+    private commentService: CommentService,
+    private store: StoreService
   ) {}
 
   addComment(event: Event) {
@@ -25,7 +27,7 @@ export class AddCommentComponent {
     const comment: CommentRequest = {
       content: this.content,
       postId: this.postId,
-      memberId: 1
+      memberId: this.store.user.id
     };
     this.commentService.addComment(comment).subscribe({
       next: () => {

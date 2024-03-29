@@ -33,8 +33,8 @@
     <div class="opacity-0 invisible dropdown-menu transition-all duration-300 transform origin-top-right -translate-y-2 scale-95" [class.opacity-100]="isDropdownOpen" [class.visible]="isDropdownOpen">
       <div class="absolute right-0 w-56 mt-2 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none" aria-labelledby="headlessui-menu-button-1" id="headlessui-menu-items-117" role="menu">
         <div class="py-1">
-          <button (click)="toggleRemoveModal()" tabindex="0" class="text-gray-700 hover:bg-gray-200 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left" role="menuitem" >Delete</button>
-          <button (click)="toggleReportModal()" tabindex="0" class="text-gray-700 hover:bg-gray-200 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left" role="menuitem" >Report</button>
+          <button *ngIf="isOwnOrIsAdmin()" (click)="toggleRemoveModal()" tabindex="0" class="text-gray-700 hover:bg-gray-200 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left" role="menuitem" >Delete</button>
+          <button *ngIf="isUser()" (click)="toggleReportModal()" tabindex="0" class="text-gray-700 hover:bg-gray-200 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left" role="menuitem" >Report</button>
         </div>
       </div>
     </div>
